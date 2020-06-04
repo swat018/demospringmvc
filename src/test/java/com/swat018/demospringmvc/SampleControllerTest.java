@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,9 +25,9 @@ public class SampleControllerTest {
     @Autowired
     MockMvc mockMvc;
 
-    @Test
+/*    @Test
     public void hello() throws Exception {
-/*        // 요청 "/hello"
+*//*        // 요청 "/hello"
         // 응답
         // - 모델 name : jinwoo
         // - 뷰 이름 : hello
@@ -34,9 +37,17 @@ public class SampleControllerTest {
                 .andExpect(MockMvcResultMatchers.view().name("hello"))
                 .andExpect(MockMvcResultMatchers.model().attribute("name", is("jinwoo")))
                 .andExpect(MockMvcResultMatchers.xpath("//h1").string("jinwoo"))
-                .andExpect(MockMvcResultMatchers.content().string(containsString("jinwoo")));*/
+                .andExpect(MockMvcResultMatchers.content().string(containsString("jinwoo")));*//*
         HtmlPage page = webClient.getPage("/hello");
         HtmlHeading1 h1 = page.getFirstByXPath("//h1");
         assertThat(h1.getTextContent()).isEqualToIgnoringCase("jinwoo");
+    }*/
+
+    @Test
+    public void hello() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.get("/hello"))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$._links.self").exists());
     }
 }
