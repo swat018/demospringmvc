@@ -36,7 +36,7 @@ public class SampleController {
         appError.setReason("IDK IDK IDK");
         return appError;
     }*/
-    @GetMapping("/hello")
+/*    @GetMapping("/hello")
     public RepresentationModel<Hello> hello() {
         Hello hello = new Hello();
         hello.setPrefix("Hey, ");
@@ -47,5 +47,5 @@ public class SampleController {
 
 
         return helloRepresentationModel;
-    }
+    }*/
 }
